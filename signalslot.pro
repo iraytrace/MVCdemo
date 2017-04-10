@@ -8,18 +8,15 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = observer
+TARGET = sigslot
 TEMPLATE = app
 
 
 SOURCES += main.cpp\
-    TemperatureSensor.cpp \
-    Controller.cpp
+        MainWindow.cpp \
+    TemperatureSensor.cpp
 
-HEADERS  +=  \
-    TemperatureSensor.h \
-    Controller.h \
-    Observer.h \
-    Subject.h
+HEADERS  += MainWindow.h \
+    TemperatureSensor.h
 
-
+FORMS    += MainWindow.ui

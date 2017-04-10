@@ -3,21 +3,28 @@
 #ifndef TEMPERATURESENSOR_H
 #define TEMPERATURESENSOR_H
 
-#include "Subject.h"
-
-class TemperatureSensor : public Subject
+#include <QObject>
+#include <QTimer>
+class TemperatureSensor : public QObject
 {
+    Q_OBJECT
 public:
-    explicit TemperatureSensor();
+    explicit TemperatureSensor(QObject *parent = 0);
     double getCurrentTemperature() const { return m_lastTemperature; }
 
+signals:
+    void newTemperature(double);
+
+private slots:
     void clockTick();
+
 private:
     void updateTimeOfDay();
     double tempFromTimeOfDay();
 
     double m_lastTemperature;
 
+    QTimer m_pollTimer;
     double m_timeOfDay;
     double m_timeStep;
     double m_tempSpan;

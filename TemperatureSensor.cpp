@@ -1,23 +1,26 @@
 //  This software is covered by the MIT open source license. See misc/MIT.txt
-
 #include "TemperatureSensor.h"
 
-TemperatureSensor::TemperatureSensor()
-    : m_lastTemperature(0.0)
+TemperatureSensor::TemperatureSensor(QObject *parent)
+    : QObject(parent), m_lastTemperature(0.0)
     , m_timeOfDay(0.0), m_timeStep(0.50)
     , m_tempSpan(30.0), m_lowTemp(55.0)
 {
+    m_pollTimer.setInterval(250);
+    connect(&m_pollTimer, SIGNAL(timeout()),
+            this, SLOT(clockTick()));
+
+    m_pollTimer.start();
 }
+
 
 void TemperatureSensor::clockTick()
 {
     updateTimeOfDay();
 
     double t = tempFromTimeOfDay();
-    if (t != m_lastTemperature) {
-        m_lastTemperature = t;
-        notifyObservers();
-    }
+    if (t != m_lastTemperature)
+        emit newTemperature(m_lastTemperature = t);
 }
 
 void TemperatureSensor::updateTimeOfDay()

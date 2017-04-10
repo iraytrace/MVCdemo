@@ -1,17 +1,13 @@
 //  This software is covered by the MIT open source license. See misc/MIT.txt
 
+#include "MainWindow.h"
 #include <QApplication>
-#include <QThread>
-#include "Controller.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Controller controller;
+    MainWindow w;
+    w.show();
 
-    while ( controller.wakeUp() ) {
-        a.processEvents();
-        QThread::msleep(200);
-    }
-    return 0;
+    return a.exec();
 }
