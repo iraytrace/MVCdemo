@@ -5,12 +5,14 @@
 
 #include <QLabel>
 #include "TemperatureSensor.h"
+#include "Observer.h"
 
-class Controller
+class Controller : public Observer
 {
 public:
     explicit Controller();
     bool wakeUp();
+    void notify() override;
 
 private:
     QLabel *m_label;

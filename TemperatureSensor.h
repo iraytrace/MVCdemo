@@ -3,12 +3,15 @@
 #ifndef TEMPERATURESENSOR_H
 #define TEMPERATURESENSOR_H
 
-class TemperatureSensor
+#include "Subject.h"
+
+class TemperatureSensor : public Subject
 {
 public:
     explicit TemperatureSensor();
-    double getCurrentTemperature();
+    double getCurrentTemperature() const { return m_lastTemperature; }
 
+    void clockTick();
 private:
     void updateTimeOfDay();
     double tempFromTimeOfDay();

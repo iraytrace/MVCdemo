@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = preobserver
+TARGET = observer
 TEMPLATE = app
 
 
@@ -18,7 +18,8 @@ SOURCES += main.cpp\
 
 HEADERS  +=  \
     TemperatureSensor.h \
-    Controller.h
-
+    Controller.h \
+    Observer.h \
+    Subject.h
 
 
