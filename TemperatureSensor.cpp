@@ -19,8 +19,9 @@ void TemperatureSensor::clockTick()
     updateTimeOfDay();
 
     double t = tempFromTimeOfDay();
-    if (t != m_lastTemperature)
+    if (t != m_lastTemperature) {
         emit newTemperature(m_lastTemperature = t);
+    }
 }
 
 void TemperatureSensor::updateTimeOfDay()
